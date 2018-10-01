@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import leafs from "./leafs.json";
 
 class App extends Component {
   render() {
