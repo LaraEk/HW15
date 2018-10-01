@@ -1,7 +1,7 @@
 import React from "react";
 import "./leafcard.css";
 
-const leafcard = props => (
+const LeafCard = props => (
     <div className="card">
         <div className="img-container">
             <a onClick={() => props.selectLeaf(props.type)} className={props.currentscore === 0 ? "style_prevu_kit style_prevu_kit_ex" : "style_prevu_kit" } >
@@ -11,4 +11,4 @@ const leafcard = props => (
     </div>
 );
 
-export default leafcard;
+export default LeafCard;
