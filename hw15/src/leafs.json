@@ -1,33 +1,41 @@
 [
     {
+        "id": 1, 
         "type": "maple",
         "image": "https://i.imgur.com/xHEkoXS.jpg"
     },
     {
+        "id": 2, 
         "type": "red oak",
         "image": "https://i.imgur.com/D9n1Ux4.jpg"
     },
     {
+        "id": 3, 
         "type": "tulip poplar",
         "image": "https://i.imgur.com/68oAINY.jpg"
     },
     {
+        "id": 4, 
         "type": "willow",
         "image": "http://i.imgur.com/jo9HLCn.jpg?2"
     },
     {
+        "id": 5, 
         "type": "white oak",
         "image": "https://i.imgur.com/ZkmVNfF.jpg"
     },
     {
+        "id": 6, 
         "type": "silver maple",
         "image": "http://i.imgur.com/IIJQw89.jpg"
     },
     {
+        "id": 7, 
         "type": "white pine",
         "image": "https://i.imgur.com/k6zqbYH.jpg"
     },
     {
+        "id": 8, 
         "type": "juniper",
         "image": "https://i.imgur.com/AbFmAvd.jpg"
     }
