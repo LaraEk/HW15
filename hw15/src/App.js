@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import LeafCard from "./components/LeafCard";
 import Wrapper from "./components/Wrapper";
 import TopText from "./components/TopText";
+import Score from "./components/Score";
 import leafs from "./leafs.json";
 import './App.css';
 
@@ -11,7 +12,7 @@ class App extends Component {
   state= {
     message: "click a leaf to start!",
     leafs,
-    thechosenleafs = [],
+    thechosenleafs: [],
     score: 0,
     highscore: 0
   };
@@ -28,7 +29,7 @@ class App extends Component {
       clickedLeafIDs.push(id)
 
       if (clickedLeafIDs.length === 8) {
-        this.setState({ score: 8 status: "You have gatehred all the leaves!  Your yard is clean! Keep clicking to help clear your neighbor's yard...", clickedLeafIDs: [] });
+        this.setState({ score: 8, status: "You have gathered all the leaves!  Your yard is clean! Keep clicking to help clear your neighbor's yard...", clickedLeafIDs: [] });
         console.log("win condition achieved");
         return;
       }
@@ -45,10 +46,26 @@ class App extends Component {
 
   } // this curly finished the SHUFFLE LEAFS function
 
+// Render Unto Class Component That Which Is Class Component's
+  render() {
+    return (
+      <div className="App">
+        <header className="app-header">
+          <TopText />
+        </header>
 
+        <Score total={this.state.score} goal={8} status={this.state.status} />
 
+        <Wrapper> {this.state.leafs.map(leaf => (
+          <LeafCard shuffleLeafs={ this.shuffleLeafs } id={ leaf.id } key={ leaf.id } image= { leaf.image } />
+          ))} 
+        </Wrapper>
+
+      </div>
+    );
+  } // this curly is to RENDER
 
   
-}
+} // this curly is to CLASS APP EXTENDS COMPONENT
 
 export default App;

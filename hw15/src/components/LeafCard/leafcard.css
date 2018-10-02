@@ -3,6 +3,10 @@
     border: 2px dashed black;
 }
 
+img {
+    width: 200px;
+}
+
 .style_prevu_kit
 {
     display:inline-block;
