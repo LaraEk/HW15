@@ -56,7 +56,8 @@ class App extends Component {
 
         <Score total={this.state.score} goal={8} status={this.state.status} />
 
-        <Wrapper> {this.state.leafs.map(leaf => (
+        <Wrapper> 
+          {this.state.leafs.map(leaf => (
           <LeafCard shuffleLeafs={ this.shuffleLeafs } id={ leaf.id } key={ leaf.id } image= { leaf.image } />
           ))} 
         </Wrapper>

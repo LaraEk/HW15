@@ -1,6 +1,6 @@
 .wrapper {
     color: orange; /* to fix color later */
-    padding-top: 10px;
+    padding: 10px;
     height: 100%;
     display: flex;
     flex-flow: row wrap;
