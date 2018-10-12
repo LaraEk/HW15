@@ -14,33 +14,47 @@ class App extends Component {
     leafs,
     thechosenleafs: [],
     score: 0,
-    highscore: 0
+    highscore: 0,
+    clickedLeafIDs: []
   };
 
   // this is the function to shuffle when clicked!
   shuffleLeafs = id => {
-    let clickedLeafIDs = this.state.clickedLeafIDs;
+    console.log(id);
+    //let clickedLeafIDs = this.state.clickedLeafIDs;
 
-    if(clickedLeafIDs.includes(id)) {
-      this.setState({ clickedLeafIDs: [], score: 0, status: "Your leaf-bag has been emptied! Keep clicking to start anew!" });
-      console.log("loss condition achieved");
-      return;
+    if(this.state.clickedLeafIDs.includes(id)) {
+      this.setState({ clickedLeafIDs: [] });   
+        this.setState({ score: 0 });
+        this.setState({ status: "Your leaf-bag has been emptied! Keep clicking to start anew!" });
+
+        console.log("loss condition achieved");
+          return;
     } else {
-      clickedLeafIDs.push(id)
 
-      if (clickedLeafIDs.length === 8) {
+      let a = this.state.clickedLeafIDs.slice(); //creates the clone of the state
+      a[this.state.clickedLeafIDs.length - 1] = id;
+      this.setState({clickedLeafIDs: a});
+
+
+     // clickedLeafIDs.push(id)
+
+      if (this.state.clickedLeafIDs.length === 8) {
         this.setState({ score: 8, status: "You have gathered all the leaves!  Your yard is clean! Keep clicking to help clear your neighbor's yard...", clickedLeafIDs: [] });
         console.log("win condition achieved");
         return;
       }
 
-      this.setState({ leafs, clickedLeafIDs, score: clickedLeafIDs.length, status: " " });
-
+      this.setState({ score: " " });
+    //  this.setState({ clickedLeafIDs: this.state.clickedLeafIDs.length });
+      
       for(let i = leafs.length -1; i > 0; i--) {
         let z = Math.floor(Math.random() * (i + 1));
         [leafs[i], leafs[z] = leafs[z], leafs[i]];
         console.log("shuffle shuffle");
       }
+
+      this.setState({ leafs: leafs });
 
     } // this curly is to ELSE above
 
@@ -57,8 +71,8 @@ class App extends Component {
         <Score total={this.state.score} goal={8} status={this.state.status} />
 
         <Wrapper> 
-          {this.state.leafs.map(leaf => (
-          <LeafCard shuffleLeafs={ this.shuffleLeafs } id={ leaf.id } key={ leaf.id } image= { leaf.image } />
+          {leafs.map(leaf => (
+          <LeafCard shuffleLeafs={this.shuffleLeafs} id={ leaf.id } key={ leaf.id } image= { leaf.image } />
           ))} 
         </Wrapper>
 

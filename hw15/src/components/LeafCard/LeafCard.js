@@ -3,7 +3,7 @@ import "./leafcard.css";
 
 const LeafCard = props => (
     <div className="card img-container">
-        <a onClick={() => props.shuffleLeafs(props.id) } className="shuffleLeafCards 'style_prevu_kit' : 'style_prevu_kit' ">
+        <a onClick={() => props.shuffleLeafs(props.id) } className="shuffleLeafCards">
             <img alt={ props.type } src={ props.image } id={ props.id } />
         </a>
     </div>
