@@ -11,8 +11,7 @@ class App extends Component {
 
   state= {
     message: "click a leaf to start!",
-    leafs,
-    thechosenleafs: [],
+    leafs: leafs,
     score: 0,
     highscore: 0,
     clickedLeafIDs: []
@@ -21,23 +20,18 @@ class App extends Component {
   // this is the function to shuffle when clicked!
   shuffleLeafs = id => {
     console.log(id);
-    //let clickedLeafIDs = this.state.clickedLeafIDs;
 
     if(this.state.clickedLeafIDs.includes(id)) {
       this.setState({ clickedLeafIDs: [] });   
-        this.setState({ score: 0 });
-        this.setState({ status: "Your leaf-bag has been emptied! Keep clicking to start anew!" });
-
-        console.log("loss condition achieved");
-          return;
+      this.setState({ score: 0 });
+      this.setState({ status: "Your leaf-bag has been emptied! Keep clicking to start anew!" });
+      console.log("loss condition achieved");
+        return;
     } else {
 
       let a = this.state.clickedLeafIDs.slice(); //creates the clone of the state
       a[this.state.clickedLeafIDs.length - 1] = id;
       this.setState({clickedLeafIDs: a});
-
-
-     // clickedLeafIDs.push(id)
 
       if (this.state.clickedLeafIDs.length === 8) {
         this.setState({ score: 8, status: "You have gathered all the leaves!  Your yard is clean! Keep clicking to help clear your neighbor's yard...", clickedLeafIDs: [] });
@@ -46,11 +40,10 @@ class App extends Component {
       }
 
       this.setState({ score: " " });
-    //  this.setState({ clickedLeafIDs: this.state.clickedLeafIDs.length });
       
       for(let i = leafs.length -1; i > 0; i--) {
         let z = Math.floor(Math.random() * (i + 1));
-        [leafs[i], leafs[z] = leafs[z], leafs[i]];
+        [leafs[i], leafs[z]] = [leafs[z], leafs[i]];
         console.log("shuffle shuffle");
       }
 
