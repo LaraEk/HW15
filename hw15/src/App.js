@@ -10,19 +10,25 @@ import './App.css';
 class App extends Component {
 
   state= {
-    message: "click a leaf to start!",
+    status: "click a leaf to start!",
     leafs: leafs,
     score: 0,
-    highscore: 0,
     clickedLeafIDs: []
   };
 
   // this is the function to shuffle when clicked!
   shuffleLeafs = id => {
     console.log(id);
+    console.log(this.state.clickedLeafIDs);
+    this.setState({
+      clickedLeafIDs: this.state.clickedLeafIDs + id, //NOTE: HOW TO GET THIS ARRAY TO LOG IDS
+      score: this.state.score + 1,
+    });
+    console.log("after click: " + this.state.clickedLeafIDs); // NOTE: it doesn't get here correctly!
+    console.log(this.state.score);
 
     if(this.state.clickedLeafIDs.includes(id)) {
-      this.setState({ clickedLeafIDs: [] });   
+      this.setState({ clickedLeafIDs: [] });          // note: WHY DO SCORE AND STATUS NEVER LOG 
       this.setState({ score: 0 });
       this.setState({ status: "Your leaf-bag has been emptied! Keep clicking to start anew!" });
       console.log("loss condition achieved");
@@ -32,14 +38,15 @@ class App extends Component {
       let a = this.state.clickedLeafIDs.slice(); //creates the clone of the state
       a[this.state.clickedLeafIDs.length - 1] = id;
       this.setState({clickedLeafIDs: a});
+      // NOTE: if I X this part out, the array gets super-wonky.  why???  what does the clone help
 
-      if (this.state.clickedLeafIDs.length === 8) {
+      if (this.state.clickedLeafIDs.length === 8) {          // note: WHY DO SCORE AND STATUS NEVER LOG
         this.setState({ score: 8, status: "You have gathered all the leaves!  Your yard is clean! Keep clicking to help clear your neighbor's yard...", clickedLeafIDs: [] });
         console.log("win condition achieved");
         return;
       }
 
-      this.setState({ score: " " });
+//      this.setState({ score: " " });
       
       for(let i = leafs.length -1; i > 0; i--) {
         let z = Math.floor(Math.random() * (i + 1));
@@ -61,11 +68,11 @@ class App extends Component {
           <TopText />
         </header>
 
-        <Score total={this.state.score} goal={8} status={this.state.status} />
+        <Score total={ this.state.score } status={ this.state.status } />
 
         <Wrapper> 
           {leafs.map(leaf => (
-          <LeafCard shuffleLeafs={this.shuffleLeafs} id={ leaf.id } key={ leaf.id } image= { leaf.image } />
+          <LeafCard shuffleLeafs={ this.shuffleLeafs } id={ leaf.id } key={ leaf.id } image= { leaf.image } />
           ))} 
         </Wrapper>
 
