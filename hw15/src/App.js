@@ -21,42 +21,50 @@ class App extends Component {
     console.log(id);
     console.log(this.state.clickedLeafIDs);
     this.setState({
-      clickedLeafIDs: this.state.clickedLeafIDs + id, //NOTE: HOW TO GET THIS ARRAY TO LOG IDS
+      clickedLeafIDs: [...this.state.clickedLeafIDs, id],
       score: this.state.score + 1,
+      status: "the trees are nervous, but accept you so far..."
     });
     console.log("after click: " + this.state.clickedLeafIDs); // NOTE: it doesn't get here correctly!
     console.log(this.state.score);
 
-    if(this.state.clickedLeafIDs.includes(id)) {
-      this.setState({ clickedLeafIDs: [] });          // note: WHY DO SCORE AND STATUS NEVER LOG 
-      this.setState({ score: 0 });
-      this.setState({ status: "Your leaf-bag has been emptied! Keep clicking to start anew!" });
-      console.log("loss condition achieved");
-        return;
-    } else {
+    for(let i = leafs.length -1; i > 0; i--) {
+      let z = Math.floor(Math.random() * (i + 1));
+      [leafs[i], leafs[z]] = [leafs[z], leafs[i]];
+      console.log("shuffle shuffle");
+    }
 
-      let a = this.state.clickedLeafIDs.slice(); //creates the clone of the state
-      a[this.state.clickedLeafIDs.length - 1] = id;
-      this.setState({clickedLeafIDs: a});
-      // NOTE: if I X this part out, the array gets super-wonky.  why???  what does the clone help
 
-      if (this.state.clickedLeafIDs.length === 8) {          // note: WHY DO SCORE AND STATUS NEVER LOG
-        this.setState({ score: 8, status: "You have gathered all the leaves!  Your yard is clean! Keep clicking to help clear your neighbor's yard...", clickedLeafIDs: [] });
-        console.log("win condition achieved");
-        return;
-      }
+//     if(this.state.clickedLeafIDs.includes(id)) {
+//       this.setState({ clickedLeafIDs: [] });          // note: WHY DO SCORE AND STATUS NEVER LOG 
+//       this.setState({ score: 0 });
+//       this.setState({ status: "Your leaf-bag has been emptied! Keep clicking to start anew!" });
+//       console.log("loss condition achieved");
+//         return;
+//     } else {
 
-//      this.setState({ score: " " });
+//       let a = this.state.clickedLeafIDs.slice(); //creates the clone of the state
+//       a[this.state.clickedLeafIDs.length - 1] = id;
+//       this.setState({clickedLeafIDs: a});
+//       // NOTE: if I X this part out, the array gets super-wonky.  why???  what does the clone help
+
+//       if (this.state.clickedLeafIDs.length === 8) {          // note: WHY DO SCORE AND STATUS NEVER LOG
+//         this.setState({ score: 8, status: "You have gathered all the leaves!  Your yard is clean! Keep clicking to help clear your neighbor's yard...", clickedLeafIDs: [] });
+//         console.log("win condition achieved");
+//         return;
+//       }
+
+// //      this.setState({ score: " " });
       
-      for(let i = leafs.length -1; i > 0; i--) {
-        let z = Math.floor(Math.random() * (i + 1));
-        [leafs[i], leafs[z]] = [leafs[z], leafs[i]];
-        console.log("shuffle shuffle");
-      }
+//       for(let i = leafs.length -1; i > 0; i--) {
+//         let z = Math.floor(Math.random() * (i + 1));
+//         [leafs[i], leafs[z]] = [leafs[z], leafs[i]];
+//         console.log("shuffle shuffle");
+//       }
 
-      this.setState({ leafs: leafs });
+//       this.setState({ leafs: leafs });
 
-    } // this curly is to ELSE above
+//     } // this curly is to ELSE above
 
   } // this curly finished the SHUFFLE LEAFS function
 
