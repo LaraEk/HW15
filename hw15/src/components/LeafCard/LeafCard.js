@@ -10,11 +10,3 @@ const LeafCard = props => (
 );
 
 export default LeafCard;
-
-    // <div className="card">
-    //     <div className="img-container">
-    //         <a onClick={ () => props.selectLeaf( props.type ) } className={ props.score === 0 ? "style_prevu_kit" : "style_prevu_kit" } >
-    //             <img alt={ props.type } src={ props.image } />
-    //         </a>
-    //     </div>
-    // </div>
