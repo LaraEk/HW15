@@ -9,7 +9,7 @@ import './App.css';
 
 class App extends Component {
 
-  state= {
+  state = {
     status: "click a leaf to start!",
     leafs: leafs,
     score: 0,
@@ -18,21 +18,45 @@ class App extends Component {
 
   // this is the function to shuffle when clicked!
   shuffleLeafs = id => {
-    console.log(id);
-    console.log(this.state.clickedLeafIDs);
+    console.log("this is the ID of the thing you clicked on: " + id);
+    console.log("this is the array before you click: " + this.state.clickedLeafIDs);
     this.setState({
       clickedLeafIDs: [...this.state.clickedLeafIDs, id],
       score: this.state.score + 1,
       status: "the trees are nervous, but accept you so far..."
     });
-    console.log("after click: " + this.state.clickedLeafIDs); // NOTE: it doesn't get here correctly!
-    console.log(this.state.score);
+    console.log("this is the array after click: " + this.state.clickedLeafIDs); // NOTE: it doesn't get here correctly!
+    console.log("this is the score after you click: " + this.state.score);
+    console.log("---------------");
 
     for(let i = leafs.length -1; i > 0; i--) {
       let z = Math.floor(Math.random() * (i + 1));
       [leafs[i], leafs[z]] = [leafs[z], leafs[i]];
       console.log("shuffle shuffle");
     }
+
+    if (this.state.clickedLeafIDs.includes(id)) {
+      console.log("you already clicked on this!");
+      this.setState({
+        status: "Your leaf-bag has been emptied! Keep clicking to start anew!",
+        score: 0,
+        clickedLeafIDs: [],        
+      });
+    } else if (this.state.clickedLeafIDs.length === 7) {
+      console.log("win condition achieved!")
+      this.setState({
+        
+      });
+    }
+
+//         this.setState({ score: 8, status: "You have gathered all the leaves!  Your yard is clean! Keep clicking to help clear your neighbor's yard...", clickedLeafIDs: [] });
+//         console.log("win condition achieved");
+//         return;
+//       }
+
+
+
+  } // this curly finished the SHUFFLE LEAFS function
 
 
 //     if(this.state.clickedLeafIDs.includes(id)) {
@@ -66,7 +90,6 @@ class App extends Component {
 
 //     } // this curly is to ELSE above
 
-  } // this curly finished the SHUFFLE LEAFS function
 
 // Render Unto Class Component That Which Is Class Component's
   render() {
@@ -76,7 +99,7 @@ class App extends Component {
           <TopText />
         </header>
 
-        <Score total={ this.state.score } status={ this.state.status } />
+        <Score score={ this.state.score } status={ this.state.status } />
 
         <Wrapper> 
           {leafs.map(leaf => (
